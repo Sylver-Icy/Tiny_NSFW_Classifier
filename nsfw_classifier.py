@@ -4,8 +4,9 @@ from sklearn.linear_model import LogisticRegression
 import pandas as pd
 import joblib
 
-
 df = pd.read_csv("nsfw_dataset_500.csv")
+df['text'] = df['text'].str.strip()
+df = df.drop_duplicates()
 # print(df.head())
 # print(df['label'].value_counts())
 

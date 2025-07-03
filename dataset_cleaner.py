@@ -29,12 +29,12 @@ def clean_text(text, remove_emojis):
     # Word count filter
     word_count = len(text.split())
 
-    # Too short? Skip
+    #  Skip short
     if word_count < 2:
         return []
 
-    # Too long? Split into multiple
-    if word_count > 50:
+    # Split long ones
+    if word_count > 25:
         words = text.split()
         chunks = [' '.join(words[i:i+50]) for i in range(0, len(words), 50)]
         return chunks

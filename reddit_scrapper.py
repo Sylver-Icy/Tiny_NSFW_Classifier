@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 import os
 import praw
 
-load_dotenv()  # Load .env file
+load_dotenv()
 
 reddit = praw.Reddit(
     client_id=os.getenv("CLIENT_ID"),
@@ -12,14 +12,30 @@ reddit = praw.Reddit(
     user_agent=os.getenv("USER_AGENT")
 )
 
-subreddit = reddit.subreddit('sex')
-comments = subreddit.comments(limit=400)
+def scrape_subreddit(subreddit_name: str, limit: int = 400):
+    print(f"Scraping subreddit: r/{subreddit_name} (limit: {limit})")
+    try:
+        subreddit = reddit.subreddit(subreddit_name)
+        comments = subreddit.comments(limit=limit)
+    except Exception as e:
+        print(f"Error fetching comments: {e}")
+        return
 
-data = []
-for comment in comments:
-    if comment.author and "bot" not in comment.author.name.lower():
-        data.append(comment.body)
+    data = set()
+    skipped = 0
+    for comment in comments:
+        if comment.author and "bot" not in comment.author.name.lower():
+            body = comment.body.strip().replace('\n', ' ').lower()
+            data.add(body)
+        else:
+            skipped += 1
 
-with open("nsfw_reddit.txt", "w", encoding="utf-8") as f:
-    for line in data:
-        f.write(line.replace('\n', ' ') + "\n")
+    with open("nsfw_reddit.txt", "w", encoding="utf-8") as f:
+        for line in data:
+            f.write(line + "\n")
+
+    print(f"Total comments written: {len(data)}")
+    print(f"Total comments skipped: {skipped}")
+
+if __name__ == "__main__":
+    scrape_subreddit("sex", 400)
