@@ -1,0 +1,24 @@
+#Config to edit the dataset cleaner
+scraper:
+  subreddit: "Car" #Name of subreddit to scrap from
+  limit: 400 #Number of comments to scrape
+  output_path: "dataset/raw/sfw_reddit.txt" #Name of the txt file to store scraped data
+
+cleaner:
+  remove_emojis: True #If emoji's should be removed from scraped data
+  minimum_comment_length: 2 #Drop any comment with less words than this
+  maximum_comment_length: 25 #Split any comment with more words
+  input_path: "dataset/raw/sfw_reddit.txt" #File to be cleaned
+  output_path: "dataset/clean/sfw_reddit_cleaned.csv" #Path to the cleaned file
+  label_value: 0 #default label for scrapped comments in sfw files its 0 for nsfw 1
+
+auto_label:
+  input_path: "dataset/clean/sfw_reddit_cleaned.csv" #The file which values have to be labelled
+  nsfw_output_path: "dataset/clean/nsfw_reddit.labeled.csv" #Path of file to store Nsfw comments from input file 
+  sfw_output_path: "dataset/clean/sfw_reddit.labeled.csv" #You guessed it :)
+  threshold: 0.7 #Change this based on strict you want model to be higher value mean more confidence required to mark comment nsfw
+
+manual_label:
+  input_path: "dataset/clean/sfw_reddit.labeled.csv"
+  output_path: "dataset/clean/sfw_reddit_car.csv"
+
