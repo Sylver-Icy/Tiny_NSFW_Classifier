@@ -1,6 +1,5 @@
 # 🧠 NSFW Text Classifier 🔞  
 > Modular pipeline to detect NSFW comments using TF-IDF + Logistic Regression  
-![Stars](https://img.shields.io/github/stars/Sylver-Icy/nsfw-classifier?style=social)
 
 This repo contains a modular, fully configurable NSFW text classification pipeline — it can scrape, clean, label, train, and classify user-generated text. All from scratch. All with a single command.
 
@@ -116,12 +115,9 @@ streamlit run run.py -- --mode label
 ├── cleaner/
 ├── labeler/
 ├── trainer/
-├── inference/
 ├── dataset/
 │   ├── raw/
 │   ├── clean/
-│   └── final/
-├── models/
 ├── example.env
 ├── requirements.txt
 ```
@@ -143,7 +139,7 @@ streamlit run run.py -- --mode label
 
 - The model is trained on a tiny dataset (~1000 lines). It is not production ready.
 - The purpose is to **learn, experiment, and explore** — not to judge humanity.
-- Yes, you can build something better with transformers. This is intentionally simple.It's my first ml model soooooo....
+- Yes, you can build something better with transformers. This is intentionally simple.
 
 ---
 
@@ -158,7 +154,7 @@ streamlit run run.py -- --mode label
 ---
 
 ## 💬 License
-MIT — Free to use, modify, and share. Just don’t sell it as your OnlyFans detector 🙃
+MIT — Free to use, modify, and share. Just don’t sell it as your OnlyFans detector :)
 
 ---
 
